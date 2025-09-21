@@ -10,6 +10,8 @@ services:
     build: ./python-app
     container_name: python-app
     command: ["python", "-m", "app.server", "--port", "5000", "--root", "/app/shared"]
+    environment: 
+      - PYTHONUNBUFFERED=1
     volumes: ["./shared:/app/shared"]
     networks: [project_network]
 
