@@ -1,0 +1,18 @@
+services:
+  cpp-app:
+    build: ./cpp-app
+    container_name: cpp-app
+    command: ["/app/server", "--port", "5001", "--root", "/app/shared"]
+    volumes: ["./shared:/app/shared"]
+    networks: [project_network]
+
+  python-app:
+    build: ./python-app
+    container_name: python-app
+    command: ["python", "-m", "app.server", "--port", "5000", "--root", "/app/shared"]
+    volumes: ["./shared:/app/shared"]
+    networks: [project_network]
+
+networks:
+  project_network:
+    driver: bridge
